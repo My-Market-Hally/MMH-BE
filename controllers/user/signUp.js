@@ -20,7 +20,6 @@ exports.signUp = async (req, res) => {
   }
   try {
     await signUp.passwordSchema.validateAsync(req.body);
-    
   } catch (err) {
     console.log(err);
     res.status(407).send({
