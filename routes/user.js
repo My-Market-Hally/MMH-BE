@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const authMiddleware = require('../middlewares/auth-middleware');
-const signUpFunc = require('../controllers/user/signUp');
-const userFunc = require('../controllers/user/logIn');
+//const signUpFunc = require('../controllers/user/signUp');
+//const userFunc = require('../controllers/user/logIn');
+
+const signUpFunc = require('../controllers-sql/user/signUp');
+const userFunc = require('../controllers-sql/user/logIn');
+
 
 //회원가입
 router.post('/users/signUp', signUpFunc.signUp);

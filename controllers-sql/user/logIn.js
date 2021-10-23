@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
-const User = require('../../schemas/user');
+//const User = require('../../schemas/user');
 const bcrypt = require('bcrypt');
+const models = require('../../models');
 
 exports.logInFunc = async function (req, res) {
   const { email, password } = req.body;
   // console.log(email)
-  const user = await User.findOne({ email: email }).exec();
+  const user = await models.Users.findById({ email }).exec();
   if (!user || email !== user.email) {
     res.status(400).send({
       errorMessage: '이메일 또는 패스워드가 틀렸습니다',

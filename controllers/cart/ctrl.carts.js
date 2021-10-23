@@ -25,7 +25,19 @@ const ctrlCarts = {
     const { user } = res.locals;
     const userId = user.userId;
     console.log(userId, postId, '유저, 포스트 아이디 확인용');
-    const { title, price, img, quantity } = req.body;
+    //const { title, price, img, quantity } = req.body;
+
+    const title = req.body.title;
+    const price = Number(req.body.price);
+    const img = req.body.img;
+    const quantity = Number(req.body.quantity);
+
+
+    console.log(typeof(price), "가격의 타입");
+    // console.log(typeof(Number(price)), "변환된 가격의 타입");
+    console.log(typeof(quantity), "수량의 타입");
+    // console.log(typeof(Number(quantity)), "변환된 수량의 타입");
+    // return res.send({ msg: "완료" });
 
     //예외처리 : swagger에서 잘못된 포스트아이디 값이 들어왔을 때,
     if(postId === '{postId}'){
@@ -62,7 +74,7 @@ const ctrlCarts = {
         quantity,
       });
       console.log(newCart, 'DB등록 완료');
-      console.log(postId, 'vhtmxmdkdl');
+      console.log(postId, '포스트아이디');
 
       return res.status(200).send({
         result: 'success',

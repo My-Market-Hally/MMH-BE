@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt');
 const signUp = require('../../schemas/joi');
-const User = require('../../schemas/user');
+// const User = require('../../schemas/user');
+const models = require('../../models');
 
 exports.signUp = async (req, res) => {
   try {
     let { email } = await signUp.emailSchema.validateAsync(req.body);
-    let existemail = await User.find({ email });
+    let existemail = await models.Users.findById({ email });
+    console.log(existemail);
     if (existemail.length) {
       return res.status(406).send({
         errorMessage: '이미 사용중인 email입니다.',
@@ -39,7 +41,7 @@ exports.signUp = async (req, res) => {
     console.log('2');
     const encryptedPassword = bcrypt.hashSync(password, 10);
 
-    await User.create({ userId, email, password: encryptedPassword, name });
+    await models.Users.create({ userId, email, password: encryptedPassword, name });
     console.log('3');
     res.status(201).send({ result: 'success', msg: '회원가입을 환영합니다.' });
   } catch (err) {
@@ -54,7 +56,7 @@ exports.checkDup = async (req, res) => {
   try {
     console.log(req.body);
     const { userId } = await signUp.userIdSchema.validateAsync(req.body);
-    const existUsers = await User.find({ userId });
+    const existUsers = await models.Users.findById({ userId });
     if (existUsers.length) {
       res.status(400).send({
         errorMessage: '이미 사용중인 ID입니다.',
