@@ -73,4 +73,6 @@ Market Kurly : https://www.kurly.com
             .required(),
         }).unknown();
      ```       
-
+ - 하나의 github과 하나의 branch에 push를 세 사람이 하려면 복잡했을텐데, 어떻게 하셨나요?
+   - 1. 먼저 pull, push 한다고 얘기를 나눈 후 했다.
+   - ....
